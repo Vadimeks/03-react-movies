@@ -1,0 +1,7 @@
+/* src/components/Loader/Loader.module.css */
+.text {
+    font-size: 1.5em;
+    color: #00bcd4; 
+    text-align: center;
+    padding: 20px;
+  }
