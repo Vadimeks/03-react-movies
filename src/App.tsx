@@ -5,6 +5,7 @@ import SearchBar from "../src/components/SearchBar/SearchBar";
 import MovieGrid from "../src/components/MovieGrid/MovieGrid";
 import Loader from "../src/components/Loader/Loader";
 import ErrorMessage from "../src/components/ErrorMessage/ErrorMessage";
+import MovieModal from "../src/components/MovieModal/MovieModal";
 import type { Movie } from "./types/movie";
 import { fetchMovies } from "./services/movieService";
 
@@ -13,6 +14,7 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleSearchSubmit = async (searchQuery: string) => {
     console.log("Search query from SearchBar:", searchQuery);
@@ -20,6 +22,7 @@ export default function App() {
     setMovies([]);
     setIsLoading(true);
     setError(null);
+    setSelectedMovie(null);
 
     try {
       const fetchedMovies = await fetchMovies(searchQuery);
@@ -36,20 +39,26 @@ export default function App() {
   };
 
   const handleMovieSelect = (movie: Movie) => {
-    console.log("Selected movie:", movie);
+    setSelectedMovie(movie);
   };
-
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
   return (
     <div className="app">
-      <Toaster position="top-right" /> {/* Размяшчаем Toaster */}
+      <Toaster position="top-right" />
       <SearchBar onSubmit={handleSearchSubmit} />
-      {isLoading && <Loader />} {/* Паказваем Loader, калі ідзе загрузка */}
-      {error && <ErrorMessage />}{" "}
-      {/* Паказваем ErrorMessage, калі ёсць памылка */}
+
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
       {!isLoading && !error && movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleMovieSelect} />
       )}
-      {/* Калі няма фільмаў, не загрузка і не памылка, то апавяшчэнне будзе праз toast */}
+
+      {}
+      {selectedMovie && (
+        <MovieModal movie={selectedMovie} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
