@@ -45,7 +45,14 @@ export default function App() {
   };
   return (
     <div className={css.app}>
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-center"
+        // containerStyle={{
+        //   justifyContent: "center",
+        //   alignItems: "center",
+        //   width: "100%",
+        // }}
+      />
       <SearchBar onSubmit={handleSearchSubmit} />
       {query && !isLoading && !error && movies.length === 0 && (
         <p style={{ textAlign: "center", marginTop: "20px", color: "#666" }}>
