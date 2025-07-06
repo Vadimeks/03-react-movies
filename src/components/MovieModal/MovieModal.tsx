@@ -51,9 +51,16 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
           &times;
         </button>
         <img
+          // src={
+          //   movie.backdrop_path
+          //     ? `${IMAGE_BASE_URL_ORIGINAL}${movie.backdrop_path}`
+          //     : PLACEHOLDER_IMAGE_MODAL
+          // }
           src={
             movie.backdrop_path
               ? `${IMAGE_BASE_URL_ORIGINAL}${movie.backdrop_path}`
+              : movie.poster_path
+              ? `${IMAGE_BASE_URL_ORIGINAL}${movie.poster_path}`
               : PLACEHOLDER_IMAGE_MODAL
           }
           alt={movie.title}

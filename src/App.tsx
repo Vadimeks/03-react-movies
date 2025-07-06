@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import "./App.css";
+import "./App.module.css";
 import SearchBar from "../src/components/SearchBar/SearchBar";
 import MovieGrid from "../src/components/MovieGrid/MovieGrid";
 import Loader from "../src/components/Loader/Loader";
@@ -17,7 +17,6 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleSearchSubmit = async (searchQuery: string) => {
-    console.log("Search query from SearchBar:", searchQuery);
     setQuery(searchQuery);
     setMovies([]);
     setIsLoading(true);
@@ -48,7 +47,11 @@ export default function App() {
     <div className="app">
       <Toaster position="top-right" />
       <SearchBar onSubmit={handleSearchSubmit} />
-
+      {query && !isLoading && !error && movies.length === 0 && (
+        <p style={{ textAlign: "center", marginTop: "20px", color: "#666" }}>
+          Showing results for: "{query}"
+        </p>
+      )}
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {!isLoading && !error && movies.length > 0 && (
