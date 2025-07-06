@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import "./App.module.css";
+import css from "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
