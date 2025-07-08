@@ -48,21 +48,17 @@ export default function App() {
   return (
     <div className={css.app}>
       <Toaster position="top-center" />
-
-      <SearchBar onSubmit={handleSearchSubmit} />
-
+      <SearchBar onSubmit={handleSearchSubmit} />;
       {query && !isLoading && !error && movies.length === 0 && (
         <p style={{ textAlign: "center", marginTop: "20px", color: "#666" }}>
           Showing results for: "{query}"
         </p>
       )}
-
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {!isLoading && !error && movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleMovieSelect} />
       )}
-
       {selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={handleCloseModal} />
       )}
